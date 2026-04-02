@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой YouTube канал</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Шапка */
+        .header {
+            background-color: #202020;
+            padding: 20px 40px;
+            border-bottom: 1px solid #303030;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 500;
+            color: #ff0000;
+        }
+
+        .logo p {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .social-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 8px 16px;
+            background-color: #303030;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .social-links a:hover {
+            background-color: #ff0000;
+        }
+
+        /* Баннер/аватар */
+        .profile {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
+            border-bottom: 1px solid #303030;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ff0000;
+        }
+
+        .channel-name {
+            font-size: 28px;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #aaa;
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+
+        /* Сетка видео */
+        .videos-section {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff0000;
+            padding-left: 12px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .video-card {
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-info {
+            padding: 12px;
+        }
+
+        .video-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-views {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        /* Футер */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #303030;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Адаптив */
+        @media (max-width: 900px) {
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .social-links a {
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">
+        <h1>🎬 Мой Канал</h1>
+        <p>ETS 2 | Black Russia | Старый YouTube вайб</p>
+    </div>
+    <div class="social-links">
+        <a href="#">YouTube</a>
+        <a href="#">Discord</a>
+        <a href="#">Telegram</a>
+        <a href="#">Steam</a>
+    </div>
+</div>
+
+<div class="profile">
+    <img class="avatar" src="https://via.placeholder.com/120x120/ff0000/ffffff?text=AVATAR" alt="avatar">
+    <div class="channel-name">Ваше Имя / Ник</div>
+    <div class="description">
+        Дальнобой в ETS 2, сборки Black Russia, моды и ностальгия по старому YouTube.
+        Здесь живут рейсы, обзоры и просто ламповые стримы.
+    </div>
+</div>
+
+<div class="videos-section">
+    <div class="section-title">📺 Последние видео</div>
+    <div class="video-grid" id="videoGrid">
+        <!-- Видео будут подгружаться через JS или можно вставить вручную -->
+    </div>
+</div>
+
+<div class="footer">
+    © 2026 Мой канал. Сделано с ❤️ для старых добрых времен.
+</div>
+
+<script>
+    // Здесь можно вставить свои видео
+    // Пример массива с видео (замените ссылки и данные на свои)
+    const videos = [
+        {
+            title: "Первый рейс в Black Russia | Renault Premium",
+            views: "12K просмотров",
+            thumbnail: "https://via.placeholder.com/320x180/303030/ff0000?text=Video+1",
+            url: "https://youtu.be/пример1"
+        },
+        {
+            title: "Как вернуть старый интерфейс YouTube? Настройка расширения",
+            views: "8.5K просмотров",
+            thumbnail: "https://via.placeholder.com/320x180/303030/ff0000?text=Video+2",
+            url: "https://youtu.be/пример2"
+        },
+        {
+            title: "Обзор мода на приборку Renault Premium",
+            views: "5.2K просмотров",
+            thumbnail: "https://via.placeholder.com/320x180/303030/ff0000?text=Video+3",
+            url: "https://youtu.be/пример3"
+        },
+        {
+            title: "Black Russia: сложная трасса и грязь",
+            views: "21K просмотров",
+            thumbnail: "https://via.placeholder.com/320x180/303030/ff0000?text=Video+4",
+            url: "https://youtu.be/пример4"
+        },
+        {
+            title: "Почему YouTube 2021 был лучше?",
+            views: "15K просмотров",
+            thumbnail: "https://via.placeholder.com/320x180/303030/ff0000?text=Video+5",
+            url: "https://youtu.be/пример5"
+        },
+        {
+            title: "Настройка графики в ETS 2 для реализма",
+            views: "7.8K просмотров",
+            thumbnail: "https://via.placeholder.com/320x180/303030/ff0000?text=Video+6",
+            url: "https://youtu.be/пример6"
+        }
+    ];
+
+    const videoGrid = document.getElementById('videoGrid');
+    
+    videos.forEach(video => {
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        card.onclick = () => window.open(video.url, '_blank');
+        
+        card.innerHTML = `
+            <img class="video-thumbnail" src="${video.thumbnail}" alt="${video.title}">
+            <div class="video-info">
+                <div class="video-title">${video.title}</div>
+                <div class="video-views">${video.views}</div>
+            </div>
+        `;
+        
+        videoGrid.appendChild(card);
+    });
+</script>
+
+</body>
+</html>
